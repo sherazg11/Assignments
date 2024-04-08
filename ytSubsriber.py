@@ -5,7 +5,7 @@ channels = []
 n = int(input("How many channels you have? "))
 
 for i in range(n):
-    url = input()
+    url = input("Enter Url Of YT Channels: ")
     channels.append(url)
 
 
