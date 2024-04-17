@@ -19,7 +19,6 @@ sub_button.click()
 driver.execute_script("window.open('https://www.facebook.com/profile.php?id=61554043921157')")
 driver.get(user_id)
 like_button = driver.find_elements(By.XPATH, '//div[@aria-label="Like"]')
-for like_button in like_button:
     like_button.click()
     print("Post Liked")
 

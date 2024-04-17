@@ -1,13 +1,22 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
+from fake_useragent import UserAgent
+import requests
+
+headers = {
+    "User-Agent" : "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Mobile Safari/537.36"
+}
+h1 = headers
+ua = UserAgent()
 channels = []
 
-def login():
+def login(): 
+    headers = h1
     print("Siging In Your Account")
     driver = webdriver.Chrome()
-    driver.get("https://www.youtube.com/")
-    login_button = driver.find_element(By.XPATH, "//a[@class='yt-spec-button-shape-next yt-spec-button-shape-next--outline yt-spec-button-shape-next--call-to-action yt-spec-button-shape-next--size-m yt-spec-button-shape-next--icon-leading']")
+    requests.get("https://www.youtube.com/", headers=headers)
+    login_button = requests.select_one(By.XPATH, "//a[@class='yt-spec-button-shape-next yt-spec-button-shape-next--outline yt-spec-button-shape-next--call-to-action yt-spec-button-shape-next--size-m yt-spec-button-shape-next--icon-leading']")
     login_button.click()
     driver.get("https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Den%26next%3Dhttps%253A%252F%252Fwww.youtube.com%252F&ec=65620&hl=en&ifkv=ARZ0qKLdcYUEk1Fo6LThzCn3CO0GvCcHa8ChkzCyBw0MRe5_SdZPKg-VzOnd_UtXA628jvIwC9v6&passive=true&service=youtube&uilel=3&flowName=GlifWebSignIn&flowEntry=ServiceLogin&dsh=S-1123496035%3A1712595850193474&theme=mn&ddm=0")
     email_box = driver.find_element(By.XPATH, "//input[@class='whsOnd zHQkBf']")
@@ -16,7 +25,7 @@ def login():
     next_button.click()
     time.sleep(1500)
     pass_box = driver.find_element(By.XPATH, "//input[@type='password']")
-    pass_box.send_keys("#Asimbecker11")
+    pass_box.send_keys("#Asimbec")
     next_button = driver.find_element(By.XPATH, "//button[@class='VfPpkd-LgbsSe VfPpkd-LgbsSe-OWXEXe-k8QpJ VfPpkd-LgbsSe-OWXEXe-dgl2Hf nCP5yc AjY5Oe DuMIQc LQeN7 BqKGqe Jskylb TrZEUc lw1w4b']")
     next_button.click()
     print("Signed In")
@@ -31,6 +40,7 @@ def channel_count():
         channels.append(url)
 
 def susbcribers():
+    ua = UserAgent()
     for url in channels:
         driver = webdriver.Chrome()
         driver.get(url)
